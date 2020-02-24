@@ -1,0 +1,83 @@
+* {box-sizing: border-box;}
+
+body {
+  margin: 0;
+  background-color: #f1f1f1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+header a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+header a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+header .shopping_cart {
+  float: right;
+}
+
+header .user {
+  float: right;
+}
+
+header .search-container {
+  float: right;
+}
+
+header input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+header .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+header .search-container button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  header .search-container {
+    float: none;
+  }
+  header a, header input[type=text], header .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  header input[type=text] {
+    border: 1px solid #ccc;
+  }
+}

@@ -1,0 +1,101 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+
+<style>
+.products {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.products,
+.products > .product {
+  padding: 8px;
+}
+
+.product {
+  float: left;
+  width: 20%;
+}
+
+.products:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.content {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.content button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.content button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 900px) {
+  .product {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .product {
+    width: 100%;
+  }
+}
+
+</style>
+
+<div class="ads-showpiece-banner">
+
+</div>
+<div class="new latest products">
+    <h3 class="Heading" style="text-align:center; font-size: 50px">Latest Arrivals</h3>
+    {% for product in latest_products %}
+    <div class="product">
+        <div class="content">
+            <img src="{{ MEDIA_URL }}" alt="{{ product.title }}">
+            <h3>{{ prodcut.title }}</h3>
+            <h4 class="price">{{ product.price }}</h4>
+            <p><button>Add to Cart</button></p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="sale discounted products">
+    <h3 style="text-align:center; font-size: 50px">On Sale</h3>
+    {% for product in discounted_products %}
+    <div class="product">
+        <div class="content">
+            <img src="{{ MEDIA_URL }}" alt="{{ product.title }}">
+            <h3>{{ prodcut.title }}</h3>
+            <h4 class="price">{{ product.price }}</h4>
+            <p><button>Add to Cart</button></p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ecommerce</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'ecommerce/style.css' %}">
+        {% block includes %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <span id="title"><b><a href="{% url 'index' %}">Ecommerce</a></b></span>
+            <div class="navbar">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="">Products</a>
+                <a href="">Contact Us</a>
+                <a href="">About Us</a>
+            </div>
+            <div class="shopping_cart">
+                <a href=""><i class="fa fa-shopping-cart" style="font-size:36px"></i></a>
+            </div>
+            <div class="user">
+                {% if user.is_authenticated %}
+                <a href=""><span>Hello,<br><b>{{ user.username }}</b></span></a>
+                {% else %}
+                <a href=""><span>Sign Up</span></a>
+                {% endif %}
+            </div>
+            <div class="search-container">
+                <form>
+                    <input type="text" placeholder="search products" name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </header>
+        <div id="body-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
