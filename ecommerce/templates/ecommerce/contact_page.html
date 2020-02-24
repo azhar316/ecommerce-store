@@ -1,0 +1,87 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+
+<style>
+
+.h3 {
+  font-size: 50px;
+  text-align: center;
+}
+
+.h4 {
+  font-size: 40px;
+  text-align: center;
+}
+
+.contact-form {
+  text-align: center;
+}
+
+.form-control {
+  display: block;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  height: 50px;
+  width: 1000px;
+  font-size: 18px;
+}
+
+.form-button {
+  font-size: 24px;
+  height: 50px;
+  width: 1000px;
+  background-color: black;
+  color: white;
+}
+
+.contact-option {
+  text-align: center;
+  width: 25%;
+  float: left;
+  margin: 50px;
+  margin-top: 0px;
+  padding: 15px;
+}
+
+.icon {
+  padding: 15px;
+  background-color: chartreuse;
+  color: yellow;
+  border-radius: 50px;
+  font-size: 50px;
+  color: white;
+}
+
+</style>
+<h3 class="h3">Contact Us</h3>
+<div class="contact-form">
+    <form action="#" method="post">
+        <input type="text" class="form-control" placeholder="Name">
+        <input type="email" class="form-control" placeholder="Enter">
+        <input type="text" class="form-control" placeholder="Phone">
+        <textarea class="form-control" rows="3" style="height:150px"></textarea>
+        <button type="submit" class="form-button">Send</button>
+    </form>
+</div>
+<h4 class="h4">Reach out to Us at....</h4>
+<div class="contact-options">
+    <div class="contact-option">
+        <span class="fa fa-volume-control-phone contact-icon icon"></span>
+        <h5 class="h5">+91 7333445265</h5>
+        <h5 class="h5">+91 7223179625</h5>
+    </div>
+    <div class="contact-option">
+        <span class="fa fa-envelope contact-icon icon"></span>
+        <h5 class="h5">syedazharuddin@example.com</h5>
+        <h5 class="h5">azharuddinsyed@example.com</h5>
+    </div>
+    <div class="contact-option">
+        <span class="fa fa-map contact-icon icon"></span>
+        <h5 class="h5">1-59, fashion street,</h5>
+        <h5 class="h5">Mumbai, India</h5>
+    </div>
+</div>
+
+{% endblock %}

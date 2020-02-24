@@ -1,0 +1,77 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+
+<style>
+    .text-center {
+      text-align: center;
+    }
+
+    .h3 {
+      font-size: 50px;
+    }
+
+    .h5 {
+      font-size: 30px;
+    }
+
+    .text {
+      font-size:18px;
+    }
+
+    .about {
+      margin: 100px;
+    }
+
+    .services {
+      margin: 20px 100px;
+    }
+
+    .service {
+      width: 30%;
+      float: left;
+      padding: 10px;
+    }
+
+    .service-icon {
+      padding: 15px;
+      font-size: 50px;
+      border-radius: 50px;
+      background-color: chartreuse;
+      color: white;
+    }
+</style>
+
+<div class="about text-center">
+    <h3 class="text-center h3">About Us</h3>
+    <h3 class="text-center h3" style="color: Blue">WELCOME TO OUR STORE</h3>
+    <p class="about-text text">
+        Hello, we are a proud and trustworthy ecommerce store owner. We sell good quality products
+        with durable life. It is our believe that you will like our products.
+    </p>
+</div>
+<div class="services features text-center">
+    <div class="service feature">
+        <span class="service-icon feature-icon fa fa-truck"></span>
+        <h5 class="h5">Shipping</h5>
+        <p class="service-text feature-text text">
+            We offer fast and affordable shipping service across the country.
+        </p>
+    </div>
+    <div class="service feature ">
+        <span class="service-icon feature-icon fa fa-volume-control-phone"></span>
+        <h5 class="h5">Customer Service</h5>
+        <p class="service-text feature-text text">
+            We provide 24X7 customer service through phone and email to our customers
+        </p>
+    </div>
+    <div class="service feature">
+        <span class="service-icon feature-icon fa fa-undo"></span>
+        <h5 class="h5">Return</h5>
+        <p class="service-text feature-text text">
+            Fast and Easy returns with no questions asked policy.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

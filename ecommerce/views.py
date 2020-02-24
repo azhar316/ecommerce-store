@@ -9,3 +9,11 @@ def index(request):
     discounted_products = Product.objects.order_by('-discount_percentage')
     products = {'latest_products': latest_products, 'discounted_products': discounted_products}
     return render(request, 'ecommerce/index.html', products)
+
+
+def contact(request):
+    return render(request, 'ecommerce/contact_page.html')
+
+
+def about(request):
+    return  render(request, 'ecommerce/about_page.html')
