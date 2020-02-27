@@ -1,0 +1,86 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+
+<style>
+.product-list {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.product-list,
+.product-list > .product {
+  padding: 8px;
+}
+
+.product {
+  float: left;
+  width: 20%;
+}
+
+.product-list:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.content {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+}
+
+.product a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.content button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.content button:hover {
+  opacity: 0.7;
+}
+</style>
+
+<div class="product-list">
+{% for product in product_list %}
+<div class="product">
+    <div class="content">
+        <a href="{% url 'products:detail' product.pk %}">
+            {% with product_gallery=product.images.all|first%}
+            <img class="product-image" src="{{product_gallery.image.url}}" alt="{{ product.title }}">
+            {% endwith %}
+        </a>
+        <a href="{% url 'products:detail' product.pk %}"><h3>{{ product.title }}</h3></a>
+        <h4 class="price">{{ product.price }}</h4>
+        <p><button>Add to Cart</button></p>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<style>
+
+.detail {
+  margin: 10px;
+}
+
+.screen-left {
+  float: left;
+  width: 50%;
+  padding: 25px;
+}
+
+.screen-left img {
+  width: 100%;
+  height: auto;
+}
+
+.slide-show {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.slide-button {
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 22px;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+}
+
+.button-right {
+  right: 0px;
+}
+
+.button-left {
+  left: 0px;
+}
+
+.screen-right {
+  float: left;
+  width: 50%;
+  padding: 25px;
+}
+
+.price {
+  font-size: 22px;
+}
+
+.form button {
+  padding: 5px;
+  color: black;
+  background-color: orange;
+  text-align: center;
+  cursor: pointer;
+  width: 150px;
+  font-size: 18px;
+}
+
+.form button:hover {
+  opacity: 0.7;
+}
+
+</style>
+
+<div class="product detail">
+    <div class="content">
+        <div class="product-img screen-left img-left img">
+            <div class="product-images slide-show">
+                {% for product_gallery in product.images.all %}
+                <img class="product-slides" src="{{product_gallery.image.url}}" alt="{{product.title}}">
+                {% endfor %}
+                <button class="slide-button button-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="slide-button button-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+        </div>
+        <div class="product-details screen-right">
+            <h3 class="h3 text-center">{{product.title}}</h3>
+            <p>{{product.description}}</p>
+            <span class="price">{{product.price}}</span>
+            <div class="form">
+                <form action="" method="post">
+                    <label for="quantity">Quantity:</label>
+                    <select id="quantity" name="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <p><button class="add-to-cart">Add to Cart</button></p>
+                    <p><button class="buy-now">Buy Now</button></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("product-slides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
+{% endblock %}

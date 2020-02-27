@@ -34,6 +34,11 @@
   font-family: arial;
 }
 
+.product-image {
+  width: 100%;
+  height: auto;
+}
+
 .price {
   color: grey;
   font-size: 22px;
@@ -77,7 +82,11 @@
     {% for product in latest_products %}
     <div class="product">
         <div class="content">
-            <img src="{{ MEDIA_URL }}" alt="{{ product.title }}">
+            {% with product_gallery=product.images.all|first%}
+            <a href="{% url 'products:detail' product.pk %}">
+                <img class="product-image" src="{{product_gallery.image.url}}" alt="{{ product.title }}">
+            </a>
+            {% endwith %}
             <h3>{{ prodcut.title }}</h3>
             <h4 class="price">{{ product.price }}</h4>
             <p><button>Add to Cart</button></p>
@@ -90,7 +99,11 @@
     {% for product in discounted_products %}
     <div class="product">
         <div class="content">
-            <img src="{{ MEDIA_URL }}" alt="{{ product.title }}">
+            {% with product_gallery=product.images.all|first%}
+            <a href="{% url 'products:detail' product.pk %}">
+                <img class="product-image" src="{{product_gallery.image.url}}" alt="{{ product.title }}">
+            </a>
+            {% endwith %}
             <h3>{{ prodcut.title }}</h3>
             <h4 class="price">{{ product.price }}</h4>
             <p><button>Add to Cart</button></p>
