@@ -13,7 +13,7 @@ class Cart(models.Model):
     created = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class ProductEntry(models.Model):
