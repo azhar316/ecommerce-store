@@ -21,3 +21,6 @@ class ProductEntry(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='products')
     quantity = models.PositiveIntegerField(default=1)
+
+    def get_price(self):
+        return self.product.price * self.quantity
