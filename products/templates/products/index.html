@@ -44,9 +44,26 @@
   color: inherit;
 }
 
+.pricing {
+}
+
 .price {
-  color: grey;
+  color: black;
+  font-weight: bold;
   font-size: 22px;
+}
+
+.discount {
+  color: green;
+}
+
+.original-price {
+  color: grey;
+  font-weight: normal;
+}
+
+.discounted-price {
+  color: black;
 }
 
 .content button {
@@ -76,7 +93,15 @@
             {% endwith %}
         </a>
         <a href="{% url 'products:detail' product.pk %}"><h3>{{ product.title }}</h3></a>
-        <h4 class="price">{{ product.price }}</h4>
+        <div class="pricing">
+                {% if product.discount_percentage != 0 %}
+                <span class="discount">{{product.discount_percentage}}%</span>
+                <span class="price original-price"><del>{{ product.price }}</del></span>
+                <span class="discounted-price price">{{ product.get_discounted_price }}</span>
+                {% else %}
+                <span class="price">{{ product.price }}</span>
+                {% endif %}
+            </div>
         <p><button>Add to Cart</button></p>
     </div>
 </div>

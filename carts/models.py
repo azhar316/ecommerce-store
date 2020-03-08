@@ -44,4 +44,4 @@ class ProductEntry(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def get_price(self):
-        return self.product.price * self.quantity
+        return self.product.get_discounted_price() * self.quantity
