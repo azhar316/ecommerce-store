@@ -110,9 +110,10 @@
                 {% endif %}
             </div>
             <div class="form">
-                <form action="" method="post">
+                <form action="{% url 'carts:update' %}" method="post">{% csrf_token %}
+                    <input type="number" name="product_key" value="{{product.pk}}" hidden>
                     <label for="quantity">Quantity:</label>
-                    <select id="quantity" name="quantity">
+                    <select id="quantity" name="product_quantity">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

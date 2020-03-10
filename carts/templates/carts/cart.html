@@ -1,0 +1,10 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+{% for product_entry in cart.products.all %}
+{{product_entry.product }}<br>
+{{product_entry.quantity}}<br><br>
+{% endfor %}
+{{cart.subtotal}}<br>
+{{cart.total}}<br>
+{% endblock %}

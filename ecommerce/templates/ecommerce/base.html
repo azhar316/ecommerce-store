@@ -20,7 +20,7 @@
                 <a href="{% url 'about' %}">About Us</a>
             </div>
             <div class="shopping_cart">
-                <a href=""><i class="fa fa-shopping-cart" style="font-size:36px"></i></a>
+                <a href="{% url 'carts:home' %}"><i class="fa fa-shopping-cart" style="font-size:36px"></i></a>
             </div>
             <div class="user">
                 {% if user.is_authenticated %}

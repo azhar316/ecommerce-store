@@ -102,7 +102,11 @@
                 <span class="price">{{ product.price }}</span>
                 {% endif %}
             </div>
-        <p><button>Add to Cart</button></p>
+        <form action="{% url 'carts:update' %}" method="post">{% csrf_token %}
+                <input type="number" name="product_key" value="{{product.pk}}" hidden>
+                <input type="number" name="product_quantity" value="1" hidden>
+                <p><button>Add to Cart</button></p>
+            </form>
     </div>
 </div>
 {% endfor %}
