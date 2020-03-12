@@ -18,3 +18,12 @@ def update(request):
     product_entry = ProductEntry.objects.update_or_create(cart, product, quantity)
     cart.update_prices()
     return HttpResponseRedirect(reverse('carts:home'))
+
+
+def delete_product_entry(request):
+    cart, new_cart = Cart.objects.get_or_create(request)
+    product = get_object_or_404(Product, pk=request.POST.get('product_key'))
+    product_entry = get_object_or_404(ProductEntry, cart=cart, product=product)
+    ProductEntry.objects.get(pk=product_entry.pk).delete()
+    cart.update_prices()
+    return HttpResponseRedirect(reverse('carts:home'))
