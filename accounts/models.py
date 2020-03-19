@@ -16,7 +16,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password):
-        user = self.create_user(email, password, staff=True, admin=True)
+        user = self.create_user(email, password, staff=True, admin=True, is_superuser=True)
         return user
 
     def create_staffuser(self, email, password):
@@ -58,3 +58,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin(self):
         return self.admin
+
+    # override functions of PermissionMixin to enable staff users permission to perform
+    # all the admin tasks
+    def has_perm(self, perm, obj=None):
+        return self.staff
+
+    def has_perms(self, perm_list, obj=None):
+        return self.staff
+
+    def has_module_perms(self, app_label):
+        return self.staff
