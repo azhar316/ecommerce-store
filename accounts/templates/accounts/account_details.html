@@ -1,0 +1,7 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+{{user.email}}
+{{user.password}}<br>
+<a href="{% url 'accounts:log_out' %}">Log Out</a><br>
+{% endblock %}
