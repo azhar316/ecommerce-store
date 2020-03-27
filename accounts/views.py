@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
-from django.contrib.auth.views import LoginView
-from django.views.generic.edit import CreateView, FormView
-from django.contrib.auth import authenticate, login
+from django.views.generic.edit import FormView
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomUser
 from .forms import UserCreateForm, UserLoginForm
@@ -58,3 +57,8 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+def log_out(request):
+    logout(request)
+    return redirect('/')
