@@ -1,0 +1,11 @@
+{% extends 'ecommerce\base.html' %}
+
+{% block content %}
+<div class="address-detail">
+    <div class="address">
+        <p>{{ address.get_address|linebreaks }}</p>
+    </div>
+    <a href="{% url 'addresses:update' address.pk %}">Update</a>
+    <a href="{% url 'addresses:delete' address.pk %}">Delete</a>
+</div>
+{% endblock %}

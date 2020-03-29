@@ -1,0 +1,13 @@
+{% extends 'ecommerce\base.html' %}
+
+{% block content %}
+<div class="address-list">
+    {% for address in addresses %}
+    <a href="{% url 'addresses:detail' address.pk %}"><div class="address">
+        {{address.get_short_address}}
+    </div></a>
+    <hr>
+    {% endfor %}
+</div>
+<a href="{% url 'addresses:create' %}">Add Address</a>
+{% endblock %}

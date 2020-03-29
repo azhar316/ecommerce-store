@@ -1,0 +1,12 @@
+{% extends 'ecommerce\base.html' %}
+
+{% block content %}
+<div class="address">
+    <div class="add-address">
+        <form method="post" class="post-form">{% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Add">
+        </form>
+    </div>
+</div>
+{% endblock %}
