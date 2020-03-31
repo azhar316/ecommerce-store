@@ -1,0 +1,36 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<h2>Order Summary</h2>
+<div class="products">
+    {% for product_entry in cart.products.all %}
+    <div class="product">
+        {% with product_gallery=product_entry.product.images.all|first %}
+        <img src="{{ product_gallery.image.url }}" alt="{{product_entry.product.title}}">
+        {% endwith %}
+        <h3>{{ product_entry.product.title }}</h3>
+        <span>{{ product_entry.quantity }}</span>
+        <div class="pricing">
+                {% if product.get_discounted_price == prodcut_entry.get_original_price %}
+                <span class="discount">{{product.discount_percentage}}%</span>
+                <span class="price original-price"><del>{{ product_entry.get_original_price }}</del></span>
+                <span class="discounted-price price">{{ product_entry.get_discounted_price }}</span>
+                {% else %}
+                <span class="price">{{ product_entry.price }}</span>
+                {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+<div class="addresses-select">
+    <form method="post" action="{% url 'orders:order' %}" class="post-form">{% csrf_token %}
+        {% for address in addresses %}
+        <input type="radio" name="address" id="{{ address.pk }}" value="{{ address.pk }}">
+        <label for="{{ address.pk }}">{{ address.get_short_address }}</label><br>
+        <hr>
+        {% endfor%}
+        <input type="submit" value="order">
+    </form>
+</div>
+{% endblock %}
