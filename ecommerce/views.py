@@ -16,4 +16,10 @@ def contact(request):
 
 
 def about(request):
-    return  render(request, 'ecommerce/about_page.html')
+    return render(request, 'ecommerce/about_page.html')
+
+
+def search(request):
+    query = request.GET.get('q')
+    products = Product.objects.search(query)
+    return render(request, 'products/index.html', {'product_list': products})

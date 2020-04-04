@@ -1,10 +1,30 @@
 from decimal import Decimal
 
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.core.validators import MaxValueValidator
 
 from . import utils
+
+
+class ProductQuerySet(models.query.QuerySet):
+
+    def search(self, query):
+        lookups = (Q(title__icontains=query) |
+                   Q(description__icontains=query) |
+                   Q(price__icontains=query)
+                   )
+        return self.filter(lookups).distinct()
+
+
+class ProductManager(models.Manager):
+
+    def get_queryset(self):
+        return ProductQuerySet(self.model)
+
+    def search(self, query):
+        return self.get_queryset().search(query)
 
 
 class Product(models.Model):
@@ -14,6 +34,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2)
     discount_percentage = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(99)])
     time_stamp = models.DateTimeField(default=timezone.now)
+
+    objects = ProductManager()
 
     def get_discounted_price(self):
         try:
