@@ -30,7 +30,11 @@
         <label for="{{ address.pk }}">{{ address.get_short_address }}</label><br>
         <hr>
         {% endfor%}
+        {% if addresses %}
         <input type="submit" value="order">
+        {% else %}
+        <a href="{% url 'addresses:create' %}">Add Address</a>
+        {% endif %}
     </form>
 </div>
 {% endblock %}

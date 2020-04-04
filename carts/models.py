@@ -64,6 +64,9 @@ class Cart(models.Model):
         self.total = discounted_price
         self.save()
 
+    def clear_cart(self):
+        self.products.all().delete()
+
     def __str__(self):
         try:
             # this will throw Anonymous User does not have a username exception,

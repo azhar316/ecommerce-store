@@ -1,0 +1,24 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="product">
+    {% with product_gallery=order.product.images.all|first %}
+    <img src="{{ product_gallery.image.url }}" alt="{{order.product.title}}">
+    {% endwith %}
+    <h3>{{ order.product.title }}</h3>
+    <span>{{ order.quantity }}</span>
+    <div class="pricing">
+        <span class="original-price">{{ order.subtotal }}</span>
+        <span class="discounted-price price">{{ order.total }}</span>
+    </div>
+</div>
+<h2>Order Summary</h2>
+<div class="product-status">
+    <p>
+        <span>{{ order.tracking }}</span>
+    </p>
+</div>
+<div class="address">
+    <p>{{order.address.get_address|linebreaks}}</p>
+</div>
+{% endblock %}

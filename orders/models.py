@@ -1,9 +1,26 @@
+from datetime import timedelta
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
 from products.models import Product
 from addresses.models import Address
+
+
+class OrderManager(models.Manager):
+
+    def create_orders_from_cart(self, cart, address):
+        orders = list()
+        for product_entry in cart.products.all():
+            order = self.model.objects.create(user=cart.user, address=address,
+                                              product=product_entry.product, quantity=product_entry.quantity,
+                                              subtotal=product_entry.get_original_price(),
+                                              total=product_entry.get_discounted_price(),
+                                              tracking='delivered', status='delivered',
+                                              delivered_date=timezone.now()+timedelta(days=2))
+            orders.append(order)
+        return orders
 
 
 ORDER_STATUS_CHOICES = (
@@ -34,5 +51,7 @@ class Order(models.Model):
     ordered_date = models.DateTimeField(default=timezone.now)
     delivered_date = models.DateTimeField()
 
+    objects = OrderManager()
+
     def __str__(self):
-        return self.pk
+        return str(self.pk)
