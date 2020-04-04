@@ -1,13 +1,51 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
+
+<style>
+
+.authentication {
+  border: 3px solid black;
+  text-align: center;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+input,
+.btn {
+  padding: 5px;
+  margin: 5px 0;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  width: 200px;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+</style>
+
 <div class="authentication login">
     {% if message %}
         <p class="message">{{message}}</p>
     {% endif %}
     <form method="post" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+        <p><input type="text" name="email" placeholder="email"></p>
+        <p><input type="password" name="password" placeholder="password"></p>
         <p><input type="submit" value="Log in"></p>
     </form>
+    <p>Not a User? <a href="{% url 'accounts:sign_up' %}">Sign Up</a></p>
 </div>
 {% endblock %}

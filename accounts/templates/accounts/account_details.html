@@ -1,7 +1,23 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-{{user.email}}
-{{user.password}}<br>
-<a href="{% url 'accounts:log_out' %}">Log Out</a><br>
+
+<style>
+a:link {
+  text-decoration: None;
+}
+</style>
+
+<div class="user-profile">
+    <div class="content">
+        <p>Full Name: {{user.full_name}}</p>
+        <p>Email: {{user.email}}</p>
+        <div class="account-links">
+            <p><a href="{% url 'addresses:index' %}">Your Adresses</a></p>
+            <p><a href="{% url 'orders:index' %}">Your Orders</a></p>
+            <p><a href="{% url 'accounts:log_out' %}">Log Out</a></p>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

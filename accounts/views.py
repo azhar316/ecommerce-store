@@ -5,7 +5,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CustomUser
-from .forms import UserCreateForm, UserLoginForm
+from .forms import UserCreateForm
 
 
 class UserCreateView(FormView):
@@ -38,16 +38,14 @@ def log_in(request):
         user = authenticate(email=email, password=password)
 
         if user is None:
-            form = UserLoginForm()
             error_message = 'Incorrect email or password'
-            return render(request, 'accounts/log_in.html', {'form': form, 'message': error_message})
+            return render(request, 'accounts/log_in.html', {'message': error_message})
 
         login(request, user)
         return redirect('/')
 
     else:
-        form = UserLoginForm()
-        return render(request, 'accounts/log_in.html', {'form': form})
+        return render(request, 'accounts/log_in.html')
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

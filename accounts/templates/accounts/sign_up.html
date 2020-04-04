@@ -1,8 +1,63 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-<form method="POST" class="post-form">{% csrf_token %}
-    {{ form.as_p }}
-    <p><input type="submit" value="Sign Up"></p>
-</form>
+
+<style>
+
+.sign-up {
+  border: 3px solid black;
+  text-align: center;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+input {
+  padding: 7px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+}
+
+input:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.submit {
+  background-color: #4CAF50;
+  color: white;
+  width: 200px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.submit:hover {
+  opacity:1;
+}
+
+@media screen and (max-width: 300px) {
+  .submit {
+    width: 100%;
+  }
+}
+
+</style>
+
+<div class="sign-up">
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account</p>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <p><button type="submit" class="submit">Sign Up</button></p>
+    </form>
+    <p>Already a User? <a href="{% url 'accounts:log_in' %}">Log In</a></p>
+</div>
+
 {% endblock %}

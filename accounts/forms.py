@@ -25,10 +25,3 @@ class UserCreateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ('full_name', 'email', 'password',)
-
-
-class UserLoginForm(forms.ModelForm):
-
-    class Meta:
-        model = CustomUser
-        fields = ('email', 'password',)
