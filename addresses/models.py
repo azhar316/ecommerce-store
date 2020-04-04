@@ -2,9 +2,9 @@ from django.db import models
 from django.conf import settings
 
 
-ADDRESS_TYPES = (('HOME', 'Deliver to Home'),
-                 ('OFFICE', 'Deliver to Office'),
-                 ('OTHER', 'Deliver to StoreHouse, etc'))
+ADDRESS_TYPES = (('HOME', 'HOME'),
+                 ('OFFICE', 'OFFICE'),
+                 ('OTHER', 'OTHER'))
 
 
 class Address(models.Model):

@@ -1,13 +1,50 @@
 {% extends 'ecommerce\base.html' %}
 
 {% block content %}
+
+<style>
+
+.address-list {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+table {
+  border-bottom: 1px solid black;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+}
+
+table tr {
+  height: 75px;
+}
+
+a {
+  text-decoration: None;
+}
+
+</style>
+
 <div class="address-list">
-    {% for address in addresses %}
-    <a href="{% url 'addresses:detail' address.pk %}"><div class="address">
-        {{address.get_short_address}}
-    </div></a>
-    <hr>
-    {% endfor %}
+    <h1>Addresses</h1>
+    <table>
+        {% for address in addresses %}
+        <tr>
+            <td>
+                <div class="address">
+                    {{address.get_address}}
+                    <p class="address-update-link">
+                        <a href="{% url 'addresses:detail' address.pk %}">view</a> <b> | </b>
+                        <a href="{% url 'addresses:update' address.pk %}">edit</a> <b> | </b>
+                        <a href="{% url 'addresses:delete' address.pk %}">delete</a>
+                    </p>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'addresses:create' %}">Add Address</a>
 </div>
-<a href="{% url 'addresses:create' %}">Add Address</a>
+
 {% endblock %}
