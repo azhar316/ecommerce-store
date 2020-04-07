@@ -1,10 +1,72 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
+
+<style>
+
+.order-list {
+  margin: 2%;
+}
+
+.order {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid black;
+  font-size: 24px;
+}
+
+.order {
+  clear: both;
+}
+
+.order img {
+  float: left;
+  width: 30%;
+  height: auto;
+  padding: 25px;
+}
+
+.order-details {
+  width: 70%;
+  float: left;
+  text-align: center;
+}
+
+.order-details h3 {
+  float: left;
+  width: 25%
+}
+
+.order-details h5 {
+  float: left;
+  width: 25%;
+
+}
+
+.order-details .order-status {
+  text-transform: uppercase;
+  color: green;
+}
+
+</style>
+
 <div class="order-list">
+    <h1>Your Orders</h1>
     {% for order in orders %}
     <div class="order">
-        <a href="{% url 'orders:detail' order.pk %}">{{order}}</a>
+        {% with product_gallery=order.product.images.all|first %}
+        <a href="{% url 'orders:detail' order.pk%}">
+            <img src="{{ product_gallery.image.url }}">
+        </a>
+        {% endwith %}
+        <div class="order-details">
+            <a href="{% url 'orders:detail' order.pk%}">
+                <h3>{{ order.product.title }}</h3>
+            </a>
+            <h5>{{ order.quantity }}</h5>
+            <h5>{{ order.total }}</h5>
+            <h5 class="order-status">{{ order.status }}</h5>
+        </div>
     </div>
     {% endfor %}
 </div>

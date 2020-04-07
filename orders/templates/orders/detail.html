@@ -1,24 +1,58 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-<div class="product">
-    {% with product_gallery=order.product.images.all|first %}
-    <img src="{{ product_gallery.image.url }}" alt="{{order.product.title}}">
-    {% endwith %}
-    <h3>{{ order.product.title }}</h3>
-    <span>{{ order.quantity }}</span>
-    <div class="pricing">
-        <span class="original-price">{{ order.subtotal }}</span>
-        <span class="discounted-price price">{{ order.total }}</span>
+
+<style>
+
+.order-details {
+  margin: 2%;
+}
+
+.product img {
+  float: left;
+  width: 50%;
+  height: auto;
+  padding: 25px;
+}
+
+.product-details {
+  float: left;
+  width: 50%;
+  padding: 25px;
+  font-size: 24px;
+}
+
+.product-status {
+  color: green;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+</style>
+
+<div class="order-details">
+    <h1>Order Summary</h1>
+    <div class="product">
+        {% with product_gallery=order.product.images.all|first %}
+        <img src="{{ product_gallery.image.url }}" alt="{{order.product.title}}">
+        {% endwith %}
+        <div class="product-details">
+            <h3>{{ order.product.title }}</h3>
+            <span>{{ order.quantity }}</span>
+            <div class="pricing">
+                <span class="discounted-price price">{{ order.total }}</span>
+            </div>
+            <div class="product-status">
+                <p>
+                    <span>{{ order.tracking }}</span>
+                </p>
+            </div>
+        <div class="address">
+            <p>{{order.address.get_address|linebreaks}}</p>
+        </div>
+        </div>
+
     </div>
-</div>
-<h2>Order Summary</h2>
-<div class="product-status">
-    <p>
-        <span>{{ order.tracking }}</span>
-    </p>
-</div>
-<div class="address">
-    <p>{{order.address.get_address|linebreaks}}</p>
 </div>
 {% endblock %}
