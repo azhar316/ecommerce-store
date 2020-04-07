@@ -1,8 +1,50 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-<h2>Order Summary</h2>
+
+<style>
+
+.products {
+  margin-top: 2%;
+  margin-left: 5%;
+  border: 3px solid black;
+  padding-top: 10px;
+}
+
+.products h1 {
+  padding-left: 2%;
+  padding-bottom: 10px;
+  border-bottom: 3px solid;
+}
+
+.product {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.product img {
+  width: 300px;
+  height: 150px;
+}
+
+.addresses-select {
+  margin-top: 50px;
+  margin-left: 5%;
+  margin-bottom: 50px;
+}
+
+.addresses-select button {
+  margin-top: 25px;
+  font-size: 24px;
+  width: 100px;
+  height: 50px;
+}
+
+</style>
+
 <div class="products">
+    <h1>Order Summary</h1>
     {% for product_entry in cart.products.all %}
     <div class="product">
         {% with product_gallery=product_entry.product.images.all|first %}
@@ -12,7 +54,6 @@
         <span>{{ product_entry.quantity }}</span>
         <div class="pricing">
                 {% if product.get_discounted_price == prodcut_entry.get_original_price %}
-                <span class="discount">{{product.discount_percentage}}%</span>
                 <span class="price original-price"><del>{{ product_entry.get_original_price }}</del></span>
                 <span class="discounted-price price">{{ product_entry.get_discounted_price }}</span>
                 {% else %}
@@ -31,7 +72,7 @@
         <hr>
         {% endfor%}
         {% if addresses %}
-        <input type="submit" value="order">
+        <button type="submit">Order</button>
         {% else %}
         <a href="{% url 'addresses:create' %}">Add Address</a>
         {% endif %}

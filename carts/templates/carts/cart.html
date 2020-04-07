@@ -2,53 +2,147 @@
 
 {% block content %}
 
-<h1>Shopping Cart</h1>
+<style>
+
+.products {
+  margin: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 200px;
+}
+
+.products a {
+  text-decoration: None;
+}
+
+.products table {
+  border-collapse: collapse;
+  border-bottom: 3px solid;
+  margin-bottom: 50px;
+}
+
+.products table tbody  {
+  border-bottom: 3px solid;
+}
+
+.products table th, td {
+  border-bottom: 1px solid;
+  padding: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.product-img img {
+  width: 100%;
+  height: 150px;
+}
+
+.btn {
+  font-size: 18px;
+  height: 40px;
+  width: 80px;
+  background-color: red;
+  color: white;
+}
+
+.bottom-links button {
+  font-size: 24px;
+  height: 70px;
+  width: 200px;
+  background-color: red;
+  color: white;
+}
+
+.continue-shopping {
+  float: left;
+}
+
+.checkout {
+  float: left;
+  margin-right: 100px;
+}
+
+
+</style>
+
 <div class="products">
-    {% for product_entry in cart.products.all %}
-    <div class="product">
-        <div class="product-img">
-            {% with product_gallery=product_entry.product.images.all|first %}
-            <img src="{{ product_gallery.image.url }}">
-            {% endwith %}
-        </div>
-        <div class="product-title">
-            <h3>{{ product_entry.product.title }}</h3>
-        </div>
-        <div class="product_quantity">
-            <span>{{ product_entry.quantity }}</span>
-        </div>
-        <div class="product_prices">
-            {% if product_entry.product.discount_percentage != 0 %}
-            <span class="price original-price"><del>{{ product_entry.product.price }}</del></span>
-            <span class="discounted-price price">{{ product_entry.product.get_discounted_price }}</span>
-            {% else %}
-            <span class="price">{{ product.price }}</span>
-            {% endif %}
-        </div>
-        <form action="{% url 'carts:delete_entry' %}" method="post">{% csrf_token %}
-            <input type="number" name="product_key" value="{{product_entry.product.pk}}" hidden>
-            <p><button>remove</button></p>
-        </form>
-    </div>
-    {% endfor %}
-    <div class="total-prices">
-        <table>
+    <h1>Shopping Cart</h1>
+    <table>
+        <tbody>
+            {% for product_entry in cart.products.all %}
             <tr>
-                <td>SubTotal: </td>
-                <td>{{ cart.subtotal }}</td>
+                <div class="product">
+
+                    <td>
+                        <div class="product-img">
+                            {% with product_gallery=product_entry.product.images.all|first %}
+                            <img src="{{ product_gallery.image.url }}">
+                            {% endwith %}
+                        </div>
+                    </td>
+
+                    <th>
+                        <div class="product-title">
+                            <a href="{% url 'products:detail' product_entry.product.pk %}">
+                                <h3>{{ product_entry.product.title }}</h3>
+                            </a>
+                        </div>
+                    </th>
+
+                    <td>
+                        <div class="product_quantity">
+                            <span>{{ product_entry.quantity }}</span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div>
+                            <form action="{% url 'carts:delete_entry' %}" method="post">{% csrf_token %}
+                                <input type="number" name="product_key" value="{{product_entry.product.pk}}" hidden>
+                                <p><button class="btn">remove</button></p>
+                            </form>
+                        </div>
+                    </td>
+
+                    <td style="text-align:right">
+                        <div class="product_prices">
+                            {% if product_entry.product.discount_percentage != 0 %}
+                            <span class="price original-price"><del>{{ product_entry.product.price }}</del></span>
+                            <span class="discounted-price price">{{ product_entry.product.get_discounted_price }}</span>
+                            {% else %}
+                            <span class="price">{{ product_entry.product.price }}</span>
+                            {% endif %}
+                        </div>
+                    </td>
+
+                </div>
             </tr>
-            <tr>
-                <td>Total: </td>
-                <td>{{ cart.total }}</td>
-            </tr>
-        </table>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <div class="total-prices">
+                <tr>
+                    <th>SubTotal: </th>
+                    <td colspan="4" style="text-align: right">{{ cart.subtotal }}</td>
+                </tr>
+                <tr>
+                    <th>Total: </th>
+                    <td colspan="4" style="text-align: right">{{ cart.total }}</td>
+                </tr>
+            </div>
+        </tfoot>
+    </table>
+
+    <div class="bottom-links">
+        <div class="checkout">
+            <a href="{% url 'carts:checkout' %}"><button class="btn">Checkout</button></a>
+        </div>
+        <div class="continue-shopping">
+            <a href="{% url 'products:index' %}"><button class="btn">Continue Shopping</button></a>
+        </div>
+
     </div>
-    <div class="continue-shopping">
-        <a href="{% url 'products:index' %}">Continue Shopping</a>>
-    </div>
-    <div class="checkout">
-        <a href="{% url 'carts:checkout' %}">Checkout</a>
-    </div>
+
 </div>
 
 {% endblock %}
